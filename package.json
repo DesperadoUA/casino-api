@@ -1,0 +1,38 @@
+{
+  "name": "node-api",
+  "version": "1.0.0",
+  "description": "Api",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles",
+    "start": "cross-env NODE_ENV=production node app.js",
+    "dev": "cross-env NODE_ENV=development nodemon app.js",
+    "sync-test": "cross-env NODE_ENV=test jest test/integration/auth/index.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DesperadoUA/node-api.git"
+  },
+  "author": "Lazarev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DesperadoUA/node-api/issues"
+  },
+  "homepage": "https://github.com/DesperadoUA/node-api#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "html-entities": "^2.3.2",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "sequelize": "^6.17.0",
+    "slugify": "^1.6.5"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2"
+  }
+}
