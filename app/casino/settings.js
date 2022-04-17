@@ -6,7 +6,7 @@ const config = {
     postTypeCategory: 'casino/category',
     postTypeCategorySlug: 'casinos',
     orderKey: ['rating', 'created_at', 'updated_at'], /* Key for sort */
-
+    keySort: 'rating',
     table: table, /* For config tableName */
     mainDb: tableName[table].main,           // key in core db
     metaDb: tableName[table].meta,

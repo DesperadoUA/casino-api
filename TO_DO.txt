@@ -1,2 +1,2 @@
-[] Рефактор схем дублируется postSlug и postTypeSlug
+[x] Рефактор схем дублируется postSlug и postTypeSlug
 [] Вынести в настройки ключь для сортировки постов в категориях publicPostsByArrId

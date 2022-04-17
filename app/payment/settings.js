@@ -6,7 +6,7 @@ const config = {
     postTypeCategory: 'payment/category',
     postTypeCategorySlug: 'payments',
     orderKey: ['created_at', 'updated_at'], /* Key for sort */
-
+    keySort: 'created_at',
     table: table, /* For config tableName */
     mainDb: tableName[table].main,           // key in core db
     metaDb: tableName[table].meta,

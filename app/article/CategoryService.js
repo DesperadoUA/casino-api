@@ -25,7 +25,7 @@ class Service extends BaseService {
             
             const relativeData = await relativeModel.getPosts(data[0].id)
             err.push(relativeData.confirm)
-            const posts = await postModel.publicPostsByArrId(relativeData.data)
+            const posts = await postModel.publicPostsByArrId(relativeData.data, {orderKey: settings.config.keySort})
             err.push(posts.confirm)
             
             response.confirm = err.includes('error') ? 'error' : 'ok'
