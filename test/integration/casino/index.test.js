@@ -4,8 +4,8 @@ const store = require('../../../core/store')
 const {fields, config} = require('../../../app/casino/settings')
 const commonFields = require('../../../core/BaseFields')
 
-const postSlug = config.postSlug
-const categorySlug = config.categorySlug
+const postSlug = config.postTypeSlug
+const categorySlug = config.postTypeCategorySlug
 
 describe(postSlug, () => {
     let session = ''

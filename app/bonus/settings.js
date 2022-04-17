@@ -1,8 +1,6 @@
 const tableName = require('../../core/models/tableName')
 const table = 'BONUS'
 const config = {
-    postSlug: 'bonus',
-    categorySlug: 'bonuses',
     postType: 'bonus',
     postTypeSlug: 'bonus',
     postTypeCategory: 'bonus/category',
@@ -14,7 +12,16 @@ const config = {
     metaDb: tableName[table].meta,
     categoryDb: tableName[table].category,
     relativeDB: tableName[table].relative.category,
-    relatives: {}
+    relatives: {
+        casino: {
+            relativePostType: 'CASINO',
+            key: 'casino', 
+            responseKey: 'bonus_casino',
+            table: tableName[table].relative.casino,
+            mainDb: tableName[table].main,
+            relativeDb: tableName.CASINO.main
+        },
+    }
 }
 const fields = {
     ref: {

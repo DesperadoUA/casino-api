@@ -1,9 +1,6 @@
 const tableName = require('../../core/models/tableName')
 const table = 'GAME'
 const config = {
-    postSlug: 'game',
-    categorySlug: 'games',
-    postType: 'game',
     postTypeSlug: 'game',
     postTypeCategory: 'game/category',
     postTypeCategorySlug: 'games',
@@ -26,7 +23,7 @@ const config = {
             relativePostType: 'VENDOR',
             key: 'vendor', 
             responseKey: 'game_vendor',
-            table: tableName[table].relative.casino,
+            table: tableName[table].relative.vendor,
             mainDb: tableName[table].main,
             relativeDb: tableName.VENDOR.main
         }

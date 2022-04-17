@@ -10,8 +10,8 @@ const settings = require('./settings')
 
 const TABLE = settings.config.table
 const ORDER_KEY = settings.config.orderKey
-const postSlug = settings.config.postSlug
-const categorySlug = settings.config.categorySlug
+const postSlug = settings.config.postTypeSlug
+const categorySlug = settings.config.postTypeCategorySlug
 const router = Router()
 
 router.get(`/${postSlug}`, queryParams, async (req, res) => {

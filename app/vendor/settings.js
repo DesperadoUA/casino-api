@@ -1,8 +1,6 @@
 const tableName = require('../../core/models/tableName')
 const table = 'VENDOR'
 const config = {
-    postSlug: 'vendor',
-    categorySlug: 'vendors',
     postType: 'vendor',
     postTypeSlug: 'vendor',
     postTypeCategory: 'vendor/category',
