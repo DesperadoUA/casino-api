@@ -278,14 +278,37 @@ module.exports = {
                 site: 'Site new',
                 withdrawal: 'Withdrawal new',
                 number_games: 'Number Games new',
-                category: ['Title category-1']
+                events: [],
+                welcome_bonus: 'welcome_bonus 100$',
+                freespins: '20x',
+                category: ['Title category-1'],
+                casino_license: [],
+                casino_payment: [],
+                casino_vendor: []
             }
         },
         game: {
             update: {
-                iframe: 'iframe update',
+                rating: 75,
+                number_games: 10,
+                iframe: 'iframe',
+                details: [],
+                characters: [],
+                galery: [],
                 category: ['Title category-1'],
-                game_casino: []
+                game_casino: [],
+                game_vendor: []
+            }
+        },
+        license: {
+            update: {
+                faq: [
+                    {
+                        value_1: '✅ Принимает ли Slotoking игроков из Украины? new',
+                        value_2: 'Да, принимает. Slotoking одно из первых украинских казино. Кроме игроков их Украины, здесь могут играть жители Европы и Азии.'
+                    }
+                ],
+                category: ['Title category-1']
             }
         }
     },

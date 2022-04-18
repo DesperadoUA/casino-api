@@ -4,7 +4,7 @@ module.exports = (config, sequelize, DataTypes) => {
             ...CommonModel,
             post_type: {
                 type: DataTypes.STRING,
-                defaultValue: config.postType
+                defaultValue: config.postTypeSlug
             },
             slug: {
                 type: DataTypes.STRING,

@@ -27,7 +27,10 @@ describe('Meta fields', () => {
             year: 'year',
             site: 'site',
             withdrawal: 'withdrawal',
-            number_games: 'number_games'
+            number_games: 'number_games',
+            events: [],
+            welcome_bonus: 'welcome_bonus 100$',
+            freespins: 'freespins1'
         }
         const result = Helper.metaSave(data, casinoFields)
         for(const key in casinoFields) {
