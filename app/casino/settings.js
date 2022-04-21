@@ -1,6 +1,7 @@
 const tableName = require('../../core/models/tableName')
 const table = 'CASINO'
 const config = {
+    postType: 'casino',
     postTypeSlug: 'casino',
     postTypeCategory: 'casino/category',
     postTypeCategorySlug: 'casinos',
