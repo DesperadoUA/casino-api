@@ -1,14 +1,14 @@
 const Helper = require('../../../helpers')
-const casinoFields = require('../../../app/casino/settings').fields
+const {fields} = require('../../../app/casino/settings')
 const store = require('../../../store')
 describe('Meta fields', () => {
     it(`Save empty`,() => {
-        const result = Helper.metaSave({}, casinoFields)
-        for(const key in casinoFields) {
-            if(casinoFields[key].dataType === 'JSON') {
-                expect(result[key]).toEqual(JSON.stringify(casinoFields[key].default))
+        const result = Helper.metaSave({}, fields)
+        for(const key in fields) {
+            if(fields[key].dataType === 'JSON') {
+                expect(result[key]).toEqual(JSON.stringify(fields[key].default))
             } else {
-                expect(result[key]).toEqual(casinoFields[key].default)
+                expect(result[key]).toEqual(fields[key].default)
             }
         } 
     })
@@ -32,9 +32,9 @@ describe('Meta fields', () => {
             welcome_bonus: 'welcome_bonus 100$',
             freespins: 'freespins1'
         }
-        const result = Helper.metaSave(data, casinoFields)
-        for(const key in casinoFields) {
-            if(casinoFields[key].dataType === 'JSON') {
+        const result = Helper.metaSave(data, fields)
+        for(const key in fields) {
+            if(fields[key].dataType === 'JSON') {
                 expect(result[key]).toEqual(JSON.stringify(data[key]))
             } else {
                 expect(result[key]).toEqual(data[key])
