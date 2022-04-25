@@ -1,6 +1,6 @@
 const Helper = require('../../../helpers')
 const casinoFields = require('../../../app/casino/settings').fields
-const store = require('../../../core/store')
+const store = require('../../../store')
 describe('Meta fields', () => {
     it(`Save empty`,() => {
         const result = Helper.metaSave({}, casinoFields)

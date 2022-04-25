@@ -1,6 +1,7 @@
 const CardBuilder =  require('./CardBuilder')
 const Model = require('./models')
-const store = require('../../core/store')
+const store = require('../../store')
+
 class Service {
     static async index(lang) {
         const response = {

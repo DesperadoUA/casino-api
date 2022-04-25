@@ -1,6 +1,6 @@
 const request = require('supertest')
 const app = require('../../../app')
-const store = require('../../../core/store')
+const store = require('../../../store')
 const {fields, config} = require('../../../app/payment/settings')
 const commonFields = require('../../../core/BaseFields')
 

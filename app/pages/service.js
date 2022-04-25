@@ -1,7 +1,7 @@
 const PostModel = require('./models')
 const CardBuilder =  require('./CardBuilder')
 const BaseService =  require('../../core/BaseService')
-const store = require('../../core/store')
+const store = require('../../store')
 
 class Service extends BaseService {
     static async getPublicPostByUrl(url) {

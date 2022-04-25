@@ -1,7 +1,7 @@
 const request = require('supertest')
 const crypto = require("crypto")
 const app = require('../../../app')
-const store = require('../../../core/store')
+const store = require('../../../store')
 
 describe('Auth', () => {
     const {user} = store

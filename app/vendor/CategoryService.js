@@ -3,7 +3,7 @@ const CategoryModel = require('./models/category')
 const RelativeModel = require('../../core/models/Relative')
 const CardBuilder =  require('./CardBuilder')
 const BaseService =  require('../../core/BaseService')
-const store = require('../../core/store')
+const store = require('../../store')
 const settings = require('./settings')
 
 const TABLE = settings.config.table

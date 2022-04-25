@@ -26,7 +26,7 @@ function initControllers(){
 initControllers()
 function startApp(){
     try{
-       app.listen(PORT, () => {
+       app.listen(_PORT, () => {
          console.log(`SERVER START ON PORT ${_PORT} ENV ${_NODE_ENV}`)
         } 
        )
