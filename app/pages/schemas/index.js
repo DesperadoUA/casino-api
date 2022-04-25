@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             tableName: config.mainDb,
-            timestamps:false
+            timestamps: false
         })
     return Pages
 }

@@ -1,7 +1,6 @@
 const CardBuilder =  require('./CardBuilder')
 const Model = require('./models')
 const store = require('../../core/store')
-const config = require('../../config')
 class Service {
     static async index(lang) {
         const response = {
@@ -34,7 +33,7 @@ class Service {
         const response = {
             confirm: 'ok',
             body: [],
-            lang: config.LANG[lang]
+            lang: _LANG[lang]
         }
         const {confirm, data} = await Model.all(lang)
         response.confirm = confirm

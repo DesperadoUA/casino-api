@@ -1,6 +1,5 @@
 const {decode} = require('html-entities')
-const config = require('../config')
-const {CONFIG_EDITOR} = config
+
 class CardBuilder {
     static category(posts) {
         const data = []
@@ -24,7 +23,7 @@ class CardBuilder {
     static commonDecode(post) {
        const data = {
            id: post.id,
-           permalink: `${config.SLUG_LANG[post.lang]}/${post.slug}/${post.permalink}`,
+           permalink: `${_SLUG_LANG[post.lang]}/${post.slug}/${post.permalink}`,
            title: post.title,
            status: post.status,
            thumbnail: post.thumbnail,
@@ -80,10 +79,10 @@ class CardBuilder {
             editor: post.editor,
             key_id: post.key_id
         }
-        if(CONFIG_EDITOR.TEXT_DECODE.includes(post.editor)) {
+        if(_CONFIG_EDITOR.TEXT_DECODE.includes(post.editor)) {
             newData.value = this.textValidate(post.value)
         }
-        else if(CONFIG_EDITOR.JSON_DECODE.includes(post.editor)) {
+        else if(_CONFIG_EDITOR.JSON_DECODE.includes(post.editor)) {
             newData.value = post.value === '' ? {} : JSON.parse(post.value)
         } 
         return newData
@@ -95,10 +94,10 @@ class CardBuilder {
             editor: post.editor,
             key_id: post.key_id
         }
-        if(CONFIG_EDITOR.TEXT_DECODE.includes(post.editor)) {
+        if(_CONFIG_EDITOR.TEXT_DECODE.includes(post.editor)) {
             newData.value = this.textDecode(post.value)
         }
-        else if(CONFIG_EDITOR.JSON_DECODE.includes(post.editor)) {
+        else if(_CONFIG_EDITOR.JSON_DECODE.includes(post.editor)) {
             newData.value = post.value === '' ? {} : JSON.parse(post.value)
         } 
         return newData
@@ -118,10 +117,10 @@ class CardBuilder {
         const newData = {
             id: post.id
         }
-        if(CONFIG_EDITOR.TEXT_DECODE.includes(post.editor)) {
+        if(_CONFIG_EDITOR.TEXT_DECODE.includes(post.editor)) {
             newData.value = this.textValidate(post.value)
         }
-        else if(CONFIG_EDITOR.JSON_DECODE.includes(post.editor)) {
+        else if(_CONFIG_EDITOR.JSON_DECODE.includes(post.editor)) {
             newData.value = post.value === '' ? JSON.stringify({}) : JSON.stringify(post.value)
         }
         return newData

@@ -1,9 +1,9 @@
 const PageModel = require('./../../app/pages/models')
-const LIMIT = 10000
 const PostModel = require('./../../core/models/Post')
 const CategoryModel = require('./../../core/models/Category')
 const tables = require('./../../core/models/tableName')
-const config = require('./../../config')
+const LIMIT = 10000
+
 class Service {
     static async index(lang) {
         const response = {
@@ -35,7 +35,7 @@ class Service {
             err.push(allPosts.confirm)
             allPosts.data.forEach(post => {
                 data.push({
-                    url: `${config.SLUG_LANG[post.lang]}/${post.slug}/${post.permalink}`,
+                    url: `${_SLUG_LANG[post.lang]}/${post.slug}/${post.permalink}`,
                     lastmod: post.updated_at.toLocaleString(),
                     changefreq: 'daily',
                     priority: 0.8
@@ -49,7 +49,7 @@ class Service {
             err.push(allPosts.confirm)
             allPosts.data.forEach(post => {
                 data.push({
-                    url: `${config.SLUG_LANG[post.lang]}/${post.slug}/${post.permalink}`,
+                    url: `${_SLUG_LANG[post.lang]}/${post.slug}/${post.permalink}`,
                     lastmod: post.updated_at.toLocaleString(),
                     changefreq: 'daily',
                     priority: 0.8

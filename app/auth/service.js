@@ -1,4 +1,3 @@
-require('dotenv').config()
 const CardBuilder =  require('../users/CardBuilder')
 const UsersModel = require('../users/models')
 const crypto = require("crypto")
@@ -53,7 +52,7 @@ class Service {
         const err = []
         const candidate = await UsersModel.checkLogin(data.name, data.password)
         err.push(candidate.confirm)
-        if(candidate.data.length === 0 && candidate.confirm === 'ok' && process.env.NODE_ENV === 'test') {
+        if(candidate.data.length === 0 && candidate.confirm === 'ok' && _NODE_ENV === 'test') {
             const {confirm} = await UsersModel.store(data)
             err.push(confirm)
             response.confirm = err.includes('error') ? 'error' : 'ok'

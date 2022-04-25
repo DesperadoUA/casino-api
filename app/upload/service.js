@@ -1,6 +1,5 @@
 const crypto = require("crypto")
 const fs = require('fs')
-const config = require('./../../config')
 class UploadService {
     static async upload(name, str) {
         const data = str.split(";base64,")
@@ -14,7 +13,7 @@ class UploadService {
                 const token = crypto.randomBytes(8).toString("hex")
                 const path = `./public/uploads/${token}-${name}`
                 await fs.writeFileSync(path, buff)
-                response.src = `${config.API_URL}/uploads/${token}-${name}`
+                response.src = `${_API_URL}/uploads/${token}-${name}`
                 return response
             } else {
                 response.confirm = 'error'
@@ -35,7 +34,7 @@ class UploadService {
         try {
             const path = `./public/uploads/`
             const files = fs.readdirSync(path).slice(0, MAX_ARR_IMG)
-            response.body = files.map(item => `${config.API_URL}/uploads/${item}`)
+            response.body = files.map(item => `${_API_URL}/uploads/${item}`)
             return response
         }
         catch (error) {

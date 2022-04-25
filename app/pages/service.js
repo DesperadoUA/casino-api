@@ -2,7 +2,6 @@ const PostModel = require('./models')
 const CardBuilder =  require('./CardBuilder')
 const BaseService =  require('../../core/BaseService')
 const store = require('../../core/store')
-const config = require('../../config')
 
 class Service extends BaseService {
     static async getPublicPostByUrl(url) {
@@ -49,7 +48,7 @@ class Service extends BaseService {
             confirm: 'error',
             body: [],
             total: 0,
-            lang: config.LANG[settings.lang]
+            lang: _LANG[settings.lang]
         }
         const err = []
         

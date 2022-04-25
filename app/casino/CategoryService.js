@@ -4,7 +4,6 @@ const RelativeModel = require('../../core/models/Relative')
 const CardBuilder =  require('./CardBuilder')
 const BaseService =  require('../../core/BaseService')
 const store = require('../../core/store')
-const config = require('../../config')
 const settings = require('./settings')
 
 const TABLE = settings.config.table
@@ -73,7 +72,7 @@ class Service extends BaseService {
             confirm: 'ok',
             body: [],
             total: 0,
-            lang: config.LANG[settings.lang]
+            lang: _LANG[settings.lang]
         }
         const err = []
         const categoryModel = new CategoryModel(TABLE)

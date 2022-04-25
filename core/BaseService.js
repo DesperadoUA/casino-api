@@ -1,4 +1,3 @@
-const config = require('../config')
 const PostModel = require('./models/Post')
 const CategoryModel = require('./models/Category')
 const RelativeModel = require('./models/Relative')
@@ -12,7 +11,7 @@ class BaseService {
         confirm: 'ok'
       }
        const newData = this.dataValidate(data)
-       newData.lang = config.LANG_ID[data.lang] ? config.LANG_ID[data.lang] : config.LANG_ID.ru
+       newData.lang = _LANG_ID[data.lang] ? _LANG_ID[data.lang] : _LANG_ID.ru
        newData.permalink = Helper.transliterateUrl(data.title)
 
        const postModel = new PostModel(table)
@@ -67,7 +66,7 @@ class BaseService {
         confirm: 'ok'
       }
       const newData =  Object.assign(this.dataValidate(data), {faq: JSON.stringify([])})
-      newData.lang = config.LANG_ID[data.lang] ? config.LANG_ID[data.lang] : config.LANG_ID.ru
+      newData.lang = _LANG_ID[data.lang] ? _LANG_ID[data.lang] : _LANG_ID.ru
       newData.permalink = Helper.transliterateUrl(data.title)
       
       const categoryModel = new CategoryModel(table)
@@ -139,7 +138,7 @@ class BaseService {
       newData.keywords = data.keywords || ''
       newData.meta_title = data.meta_title || ''
       newData.short_desc = data.short_desc || ''
-      newData.thumbnail = data.thumbnail || config.THUMBNAIL
+      newData.thumbnail = data.thumbnail || _THUMBNAIL
       if(data.post_type) newData.post_type = data.post_type
       if(data.slug) newData.slug = data.slug
       return newData

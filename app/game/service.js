@@ -3,7 +3,6 @@ const CardBuilder =  require('./CardBuilder')
 const BaseService =  require('../../core/BaseService')
 const settings = require('./settings')
 const store = require('../../core/store')
-const config = require('../../config')
 const TABLE = settings.config.table
 const Helper = require('../../helpers')
 const fields = settings.fields
@@ -75,7 +74,7 @@ class Service extends BaseService {
             confirm: 'error',
             body: [],
             total: 0,
-            lang: config.LANG[settings.lang]
+            lang: _LANG[settings.lang]
         }
         const err = []
         const MainModel = new PostModel(TABLE)
