@@ -277,6 +277,5 @@ class BaseService {
       
       return response
     }
-
 }
 module.exports = BaseService

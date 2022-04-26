@@ -18,13 +18,35 @@ class Service {
             confirm: 'ok',
             body: []
         }
-        const {faq, menu, multipleMenu} = store
         const posts = [
-            store.settings.text,
-            store.settings.rich_text,
-            Object.assign(store.settings.multiple_menu, {value: JSON.stringify(multipleMenu)}),
-            Object.assign(store.settings.two_input_image, {value: JSON.stringify(menu)}),
-            Object.assign(store.settings.input_text, {value: JSON.stringify(faq)})
+            {
+                key_id: 'header_menu_main',
+                value: '[]',
+                title: 'Главное меню хедера',
+                editor: 'two_input_image',
+                updateValue: []
+            },
+            {
+                key_id: 'header_menu_1',
+                value: '[]',
+                title: 'Меню хедера 1',
+                editor: 'two_input_image',
+                updateValue: []
+            },
+            {
+                key_id: 'header_menu_2',
+                value: '[]',
+                title: 'Меню хедера 2',
+                editor: 'two_input_image',
+                updateValue: []
+            },
+            {
+                key_id: 'header_menu_3',
+                value: '[]',
+                title: 'Меню хедера 3',
+                editor: 'two_input_image',
+                updateValue: []
+            }
         ]
         const {confirm} = await Model.bulkCreate(posts)
         response.confirm = confirm

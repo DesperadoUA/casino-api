@@ -48,10 +48,7 @@ function initRelativeDb(){
 initRelativeDb()
 
 db.sequelize.sync({force:dbConfig[_NODE_ENV].SYNC})
-    .then(()=>{
-        if(_NODE_ENV !== 'test') console.log('Re-sync')
-    }).catch((err) => {
-        if(_NODE_ENV !== 'test') console.log('Error Re-sync')
-})
+            .then(()=>{if(_NODE_ENV !== 'test') console.log('Re-sync')})
+            .catch((err) => {if(_NODE_ENV !== 'test') console.log('Error Re-sync')})
 
 module.exports = db

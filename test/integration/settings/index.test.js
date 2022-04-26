@@ -55,11 +55,16 @@ describe('Settings', () => {
     it('DTO admin update', async()=>{
         const response = await request(app).post('/api/admin/settings/update').send({
             data: {
-                editor: 'input',
+                editor: 'two_input_image',
                 id: 1,
-                key_id: 'text',
-                title: 'Текстовый редактор Input',
-                value: store.settings.text.updateValue
+                key_id: 'header_menu_main',
+                title: 'Главное меню хедера',
+                value: [
+                    {src:"", value_1:"Обзоры казино", value_2:"/casino"},
+                    {src:"", value_1:"Статьи", value_2:"/article"},
+                    {src:"", value_1:"Бонусы", value_2:"/bonus"},
+                    {src:"", value_1:"Слоты", value_2:"/game"}
+                ]
             },
             id: currentUserId,
             session: session
@@ -75,13 +80,14 @@ describe('Settings', () => {
         })
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
-        expect(response.body.body.editor).toBe(store.settings.text.editor)
+        expect(response.body.body.editor).toBe('two_input_image')
         expect(response.body.body.id).toBe(1)
-        expect(response.body.body.key_id).toBe(store.settings.text.key_id)
-        expect(response.body.body.title).toBe(store.settings.text.title)
-        expect(response.body.body.value).toBe(store.settings.text.updateValue)
+        expect(response.body.body.key_id).toBe('header_menu_main')
+        expect(response.body.body.title).toBe('Главное меню хедера')
+        expect(Array.isArray(response.body.body.value)).toBe(true)
     })
 })
+
 describe('Settings fail auth', () => {
     let session = 'error'
     let currentUserId = 0
@@ -97,11 +103,16 @@ describe('Settings fail auth', () => {
     it('Admin update', async()=>{
         const response = await request(app).post('/api/admin/settings/update').send({
             data: {
-                editor: 'input',
+                editor: 'two_input_image',
                 id: 1,
-                key_id: 'text',
-                title: 'Текстовый редактор Input',
-                value: store.settings.text.updateValue
+                key_id: 'header_menu_main',
+                title: 'Главное меню хедера',
+                value: [
+                    {src:"", value_1:"Обзоры казино", value_2:"/casino"},
+                    {src:"", value_1:"Статьи", value_2:"/article"},
+                    {src:"", value_1:"Бонусы", value_2:"/bonus"},
+                    {src:"", value_1:"Слоты", value_2:"/game"}
+                ]
             },
             id: currentUserId,
             session: session
