@@ -1,7 +1,7 @@
 const PageModel = require('./../../app/pages/models')
 const PostModel = require('./../../core/models/Post')
 const CategoryModel = require('./../../core/models/Category')
-const tables = require('./../../core/models/tableName')
+const tables = require('../../tables')
 const LIMIT = 10000
 
 class Service {

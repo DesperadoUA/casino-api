@@ -9,6 +9,6 @@ _LANG_ID = {'ru': 1, 'ua': 2}
 _SLUG_LANG = {1: '', 2: '/ua'}
 _CONFIG_EDITOR = {
     TEXT_DECODE: ['image', 'input', 'rich_text'],
-    JSON_DECODE: ['two_input_image', 'input_text', 'multiple_menu']
+    JSON_DECODE: ['two_input_image', 'input_text', 'multiple_menu', 'multiple_bonus']
    }
 _THUMBNAIL = 'http://127.0.0.1:5000/img/default.png' 

@@ -1,4 +1,4 @@
-const tableName = require('../../core/models/tableName')
+const tableName = require('../../tables')
 const table = 'ARTICLE'
 const config = {
     postType: 'article',

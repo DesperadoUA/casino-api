@@ -46,6 +46,27 @@ class Service {
                 title: 'Меню хедера 3',
                 editor: 'two_input_image',
                 updateValue: []
+            },
+            {
+                key_id: 'bonus_main_page',
+                value: '[]',
+                title: 'Бонусы на главной странице',
+                editor: 'multiple_bonus',
+                updateValue: []
+            },
+            {
+                key_id: 'footer_menu',
+                value: '[]',
+                title: 'Меню хедера',
+                editor: 'two_input_image',
+                updateValue: []
+            },
+            {
+                key_id: 'footer_text',
+                value: '',
+                title: 'Текст в футере',
+                editor: 'input',
+                updateValue: ''
             }
         ]
         const {confirm} = await Model.bulkCreate(posts)

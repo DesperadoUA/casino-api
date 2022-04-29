@@ -2,6 +2,7 @@ const PostModel = require('./models')
 const CardBuilder =  require('./CardBuilder')
 const BaseService =  require('../../core/BaseService')
 const store = require('../../store')
+const tables = require('../../tables')
 
 class Service extends BaseService {
     static async getPublicPostByUrl(url) {
@@ -13,6 +14,7 @@ class Service extends BaseService {
         if(data.length !== 0 && confirm === 'ok') {
             response.confirm = 'ok'
             response.body = CardBuilder.show(data[0])
+            //response.body.test = this.dataMainPages(data[0])
         }
         return response
     } 
@@ -105,5 +107,10 @@ class Service extends BaseService {
         newData.faq = data.faq ? JSON.stringify(data.faq) : JSON.stringify([])
         return newData
     } 
+    static dataMainPages(data) {
+        const CASINO_TABLE = ''
+        const MainModel = new PostModel(TABLE)
+        return {test: 'test object', lang: data.lang}
+    }
 }
 module.exports = Service

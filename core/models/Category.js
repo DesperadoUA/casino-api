@@ -1,6 +1,6 @@
 const db = require('./../../core/schemas')
 const {QueryTypes} = require('sequelize')
-const tables = require('./tableName')
+const tables = require('../../tables')
 class Category {
     constructor(name) {
         this.name = name
