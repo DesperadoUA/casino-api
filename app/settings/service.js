@@ -74,6 +74,13 @@ class Service {
                 title: 'Описание казино на главной странице ру',
                 editor: 'rich_text',
                 updateValue: ''
+            },
+            {
+                key_id: 'main_page_game_text',
+                value: '',
+                title: 'Описание игр на главной странице ру',
+                editor: 'rich_text',
+                updateValue: ''
             }
         ]
         const {confirm} = await Model.bulkCreate(posts)
