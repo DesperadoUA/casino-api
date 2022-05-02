@@ -40,7 +40,8 @@ class CasinoCardBuilder extends CardBuilder {
                 rating: post.rating,
                 close: post.close,
                 number_games: post.number_games,
-                withdrawal: post.	withdrawal,
+                withdrawal: post.withdrawal,
+                ref: JSON.parse(post.ref),
                 license: licensePost.data.length > 0 ? licensePost.data[0].title : ''
             })
         }

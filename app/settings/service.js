@@ -67,6 +67,13 @@ class Service {
                 title: 'Текст в футере',
                 editor: 'input',
                 updateValue: ''
+            },
+            {
+                key_id: 'main_page_casino_text',
+                value: '',
+                title: 'Описание казино на главной странице ру',
+                editor: 'rich_text',
+                updateValue: ''
             }
         ]
         const {confirm} = await Model.bulkCreate(posts)
