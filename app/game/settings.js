@@ -47,13 +47,6 @@ const fields = {
             defaultValue: 0
         }
     },
-    number_games: {
-        default: '',
-        dataType: 'STRING',
-        schemas: {
-            type: 'STRING'
-        }
-    },
     details: {
         default: [],
         dataType: 'JSON',
@@ -73,6 +66,30 @@ const fields = {
         dataType: 'JSON',
         schemas: {
             type: 'TEXT'
+        }
+    },
+    rtp: {
+        default: '0',
+        dataType: 'STRING',
+        schemas: {
+            type: 'STRING',
+            defaultValue: '0'
+        }
+    },
+    volatility: {
+        default: '',
+        dataType: 'STRING',
+        schemas: {
+            type: 'STRING',
+            defaultValue: ''
+        }
+    },
+    min_rate: {
+        default: '',
+        dataType: 'STRING',
+        schemas: {
+            type: 'STRING',
+            defaultValue: ''
         }
     }
 }

@@ -2,6 +2,7 @@ const PageModel = require('./models')
 const PostModel = require('./../../core/models/Post')
 const CardBuilder =  require('./CardBuilder')
 const CasinoCardBuilder = require('../../app/casino/CardBuilder')
+const GameCardBuilder = require('../../app/game/CardBuilder')
 const BaseService =  require('../../core/BaseService')
 const store = require('../../store')
 const NUMBER_CASINO_MAIN_PAGE = 15
@@ -135,7 +136,7 @@ class Service extends BaseService {
         const gameSettingsQuery = {limit: NUMBER_GAME_MAIN_PAGE, orderKey: 'rating', lang: data.lang}
         const games = await GameModel.allPublic(gameSettingsQuery)
         err.push(games.confirm) 
-        response.body.games = games.data
+        response.body.games = await GameCardBuilder.mainCard(games.data)
 
         const BonusModel = new PostModel('BONUS')
         const bonusSettingsQuery = {limit: NUMBER_BONUS_MAIN_PAGE, lang: data.lang}

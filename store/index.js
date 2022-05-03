@@ -290,8 +290,10 @@ module.exports = {
         game: {
             update: {
                 rating: 75,
-                number_games: 10,
+                rtp: 95.5,
+                volatility: 'low',
                 iframe: 'iframe',
+                min_rate: '0.5',
                 details: [],
                 characters: [],
                 galery: [],
