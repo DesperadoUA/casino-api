@@ -3,6 +3,7 @@ const PostModel = require('./../../core/models/Post')
 const CardBuilder =  require('./CardBuilder')
 const CasinoCardBuilder = require('../../app/casino/CardBuilder')
 const GameCardBuilder = require('../../app/game/CardBuilder')
+const BonusCardBuilder = require('../../app/bonus/CardBuilder')
 const BaseService =  require('../../core/BaseService')
 const store = require('../../store')
 const NUMBER_CASINO_MAIN_PAGE = 15
@@ -142,7 +143,7 @@ class Service extends BaseService {
         const bonusSettingsQuery = {limit: NUMBER_BONUS_MAIN_PAGE, lang: data.lang}
         const bonuses = await BonusModel.allPublic(bonusSettingsQuery)
         err.push(bonuses.confirm) 
-        response.body.bonuses = bonuses.data
+        response.body.bonuses = await BonusCardBuilder.mainCard(bonuses.data)
         
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response
