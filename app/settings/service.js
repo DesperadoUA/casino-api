@@ -81,6 +81,13 @@ class Service {
                 title: 'Описание игр на главной странице ру',
                 editor: 'rich_text',
                 updateValue: ''
+            },
+            {
+                key_id: 'main_page_bonus_text',
+                value: '',
+                title: 'Описание бонусов на главной странице ру',
+                editor: 'rich_text',
+                updateValue: ''
             }
         ]
         const {confirm} = await Model.bulkCreate(posts)
