@@ -9,6 +9,9 @@ const store = require('../../store')
 const NUMBER_CASINO_MAIN_PAGE = 15
 const NUMBER_GAME_MAIN_PAGE = 15
 const NUMBER_BONUS_MAIN_PAGE = 10
+const NUMBER_POST_CASINO_PAGE = 2000
+const NUMBER_POST_BONUS_PAGE = 2000
+const NUMBER_POST_GAME_PAGE = 2000
 
 class Service extends BaseService {
     static async getPublicPostByUrl(url) {
@@ -23,6 +26,21 @@ class Service extends BaseService {
             let supportData = {}
             if(url === 'main') {
                 const {body, confirm} = await this.dataMainPages(data[0]) 
+                err.push(confirm) 
+                supportData = body
+            }
+            else if(url === 'casino') {
+                const {body, confirm} = await this.dataCasinoPages(data[0]) 
+                err.push(confirm) 
+                supportData = body
+            }
+            else if(url === 'bonus') {
+                const {body, confirm} = await this.dataBonusPages(data[0]) 
+                err.push(confirm) 
+                supportData = body
+            }
+            else if(url === 'game') {
+                const {body, confirm} = await this.dataGamePages(data[0]) 
                 err.push(confirm) 
                 supportData = body
             }
@@ -145,6 +163,54 @@ class Service extends BaseService {
         err.push(bonuses.confirm) 
         response.body.bonuses = await BonusCardBuilder.mainCard(bonuses.data)
         
+        response.confirm = err.includes('error') ? 'error' : 'ok'
+        return response
+    }
+    static async dataCasinoPages(data) {
+        const response = {
+            confirm: 'error',
+            body: {}
+        }
+        const err = []
+
+        const CasinoModel = new PostModel('CASINO')
+        const casinoSettingsQuery = {limit: NUMBER_POST_CASINO_PAGE, orderKey: 'rating', lang: data.lang}
+        const casinos = await CasinoModel.allPublic(casinoSettingsQuery)
+        err.push(casinos.confirm) 
+        response.body.casinos = await CasinoCardBuilder.mainCard(casinos.data)
+
+        response.confirm = err.includes('error') ? 'error' : 'ok'
+        return response
+    }
+    static async dataBonusPages(data) {
+        const response = {
+            confirm: 'error',
+            body: {}
+        }
+        const err = []
+
+        const BonusModel = new PostModel('BONUS')
+        const bonusSettingsQuery = {limit: NUMBER_POST_BONUS_PAGE, lang: data.lang}
+        const bonuses = await BonusModel.allPublic(bonusSettingsQuery)
+        err.push(bonuses.confirm) 
+        response.body.bonuses = await BonusCardBuilder.mainCard(bonuses.data)
+
+        response.confirm = err.includes('error') ? 'error' : 'ok'
+        return response
+    }
+    static async dataGamePages(data) {
+        const response = {
+            confirm: 'error',
+            body: {}
+        }
+        const err = []
+
+        const GameModel = new PostModel('GAME')
+        const gameSettingsQuery = {limit: NUMBER_GAME_MAIN_PAGE, orderKey: 'rating', lang: data.lang}
+        const games = await GameModel.allPublic(gameSettingsQuery)
+        err.push(games.confirm) 
+        response.body.games = await GameCardBuilder.mainCard(games.data)
+
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response
     }

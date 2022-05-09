@@ -1,5 +1,5 @@
 const {decode} = require('html-entities')
-
+const Helper = require('../helpers')
 class CardBuilder {
     static category(posts) {
         const data = []
@@ -111,7 +111,7 @@ class CardBuilder {
         newData = newData.replace(/<pre class="ql-syntax" spellcheck="false">/g, '')
         newData = newData.replace(/<\/pre>/g, '')
         newData = decode(newData)
-        return newData
+        return Helper.replaceHeadings(newData)
     }
     static libValidateSave(post) {
         const newData = {

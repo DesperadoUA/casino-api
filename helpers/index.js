@@ -53,5 +53,18 @@ class Helper {
         }
         return data
     }
+    static replaceHeadings(str) {
+        [
+            {old:'<h2', new: "<h2 class='heading' data-deep='first' "},
+            {old:'<h3', new: "<h3 class='heading' data-deep='second' "},
+            {old:'<h4', new: "<h4 class='heading' data-deep='second' "},
+            {old:'<h5', new: "<h5 class='heading' data-deep='second' "},
+            {old:'<h6', new: "<h6 class='heading' data-deep='second' "}
+        ].forEach(item => {
+            const old = new RegExp(item.old, 'g');
+            str = str.replace(old, item.new) 
+        })
+        return str
+    }
  }
  module.exports = Helper
