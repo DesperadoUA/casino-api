@@ -73,6 +73,27 @@ class Category {
             return response
         }
     } 
+    async publicPostsByArrId(arr, settings = {}) {
+        const response = {
+            confirm: 'ok',
+            data: []
+        }
+        if(arr.length === 0) return response
+        try {
+            response.data = await db.sequelize.query(`Select * from ${this.tables[this.name].category} 
+                                               WHERE ${this.tables[this.name].category}.id In(${arr.join(',')}) 
+                                               AND status = 'public'`,
+            {
+            type: QueryTypes.SELECT
+            })
+            return response
+        }
+        catch (error) {
+            console.log(error)
+            response.confirm = 'error'
+            return response
+        }
+    } 
     async postsByArrId(arr) {
         const response = {
             confirm: 'ok',

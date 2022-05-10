@@ -4,6 +4,7 @@ const CardBuilder =  require('./CardBuilder')
 const CasinoCardBuilder = require('../../app/casino/CardBuilder')
 const GameCardBuilder = require('../../app/game/CardBuilder')
 const BonusCardBuilder = require('../../app/bonus/CardBuilder')
+const ArticleCardBuilder = require('../../app/article/CardBuilder')
 const BaseService =  require('../../core/BaseService')
 const store = require('../../store')
 const NUMBER_CASINO_MAIN_PAGE = 15
@@ -12,6 +13,7 @@ const NUMBER_BONUS_MAIN_PAGE = 10
 const NUMBER_POST_CASINO_PAGE = 2000
 const NUMBER_POST_BONUS_PAGE = 2000
 const NUMBER_POST_GAME_PAGE = 2000
+const NUMBER_POST_ARTICLE_PAGE = 2000
 
 class Service extends BaseService {
     static async getPublicPostByUrl(url) {
@@ -41,6 +43,11 @@ class Service extends BaseService {
             }
             else if(url === 'game') {
                 const {body, confirm} = await this.dataGamePages(data[0]) 
+                err.push(confirm) 
+                supportData = body
+            }
+            else if(url === 'article') {
+                const {body, confirm} = await this.dataArticlePages(data[0]) 
                 err.push(confirm) 
                 supportData = body
             }
@@ -206,10 +213,26 @@ class Service extends BaseService {
         const err = []
 
         const GameModel = new PostModel('GAME')
-        const gameSettingsQuery = {limit: NUMBER_GAME_MAIN_PAGE, orderKey: 'rating', lang: data.lang}
+        const gameSettingsQuery = {limit: NUMBER_POST_GAME_PAGE, orderKey: 'rating', lang: data.lang}
         const games = await GameModel.allPublic(gameSettingsQuery)
         err.push(games.confirm) 
         response.body.games = await GameCardBuilder.mainCard(games.data)
+
+        response.confirm = err.includes('error') ? 'error' : 'ok'
+        return response
+    }
+    static async dataArticlePages(data) {
+        const response = {
+            confirm: 'error',
+            body: {}
+        }
+        const err = []
+
+        const ArticleModel = new PostModel('ARTICLE')
+        const articleSettingsQuery = {limit: NUMBER_POST_ARTICLE_PAGE, lang: data.lang}
+        const articles = await ArticleModel.allPublic(articleSettingsQuery)
+        err.push(articles.confirm) 
+        response.body.articles = await ArticleCardBuilder.mainCard(articles.data)
 
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response
