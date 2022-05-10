@@ -5,6 +5,7 @@ const CasinoCardBuilder = require('../../app/casino/CardBuilder')
 const GameCardBuilder = require('../../app/game/CardBuilder')
 const BonusCardBuilder = require('../../app/bonus/CardBuilder')
 const ArticleCardBuilder = require('../../app/article/CardBuilder')
+const PaymentCardBuilder = require('../../app/payment/CardBuilder')
 const BaseService =  require('../../core/BaseService')
 const store = require('../../store')
 const NUMBER_CASINO_MAIN_PAGE = 15
@@ -14,6 +15,7 @@ const NUMBER_POST_CASINO_PAGE = 2000
 const NUMBER_POST_BONUS_PAGE = 2000
 const NUMBER_POST_GAME_PAGE = 2000
 const NUMBER_POST_ARTICLE_PAGE = 2000
+const NUMBER_POST_PAYMENT_PAGE = 2000
 
 class Service extends BaseService {
     static async getPublicPostByUrl(url) {
@@ -48,6 +50,11 @@ class Service extends BaseService {
             }
             else if(url === 'article') {
                 const {body, confirm} = await this.dataArticlePages(data[0]) 
+                err.push(confirm) 
+                supportData = body
+            }
+            else if(url === 'payment') {
+                const {body, confirm} = await this.dataPaymentPages(data[0]) 
                 err.push(confirm) 
                 supportData = body
             }
@@ -233,6 +240,22 @@ class Service extends BaseService {
         const articles = await ArticleModel.allPublic(articleSettingsQuery)
         err.push(articles.confirm) 
         response.body.articles = await ArticleCardBuilder.mainCard(articles.data)
+
+        response.confirm = err.includes('error') ? 'error' : 'ok'
+        return response
+    }
+    static async dataPaymentPages(data) {
+        const response = {
+            confirm: 'error',
+            body: {}
+        }
+        const err = []
+
+        const PaymentModel = new PostModel('PAYMENT')
+        const paymentSettingsQuery = {limit: NUMBER_POST_PAYMENT_PAGE, lang: data.lang}
+        const payments = await PaymentModel.allPublic(paymentSettingsQuery)
+        err.push(payments.confirm) 
+        response.body.payments = await PaymentCardBuilder.mainCard(payments.data)
 
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response

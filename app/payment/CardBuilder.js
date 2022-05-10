@@ -19,5 +19,17 @@ class CasinoCardBuilder extends CardBuilder {
         })
         return data
     }
+    static async mainCard(posts) {
+        const newData = []
+        for (const post of posts) {
+            newData.push({
+                title: post.title,
+                permalink: `${_SLUG_LANG[post.lang]}/${post.slug}/${post.permalink}`,
+                thumbnail: post.thumbnail,
+                short_desc: post.short_desc
+            })
+        }
+        return newData
+    }
 }
 module.exports = CasinoCardBuilder
