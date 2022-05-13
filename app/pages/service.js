@@ -6,6 +6,8 @@ const GameCardBuilder = require('../../app/game/CardBuilder')
 const BonusCardBuilder = require('../../app/bonus/CardBuilder')
 const ArticleCardBuilder = require('../../app/article/CardBuilder')
 const PaymentCardBuilder = require('../../app/payment/CardBuilder')
+const LicenseCardBuilder = require('../../app/license/CardBuilder')
+const VendorCardBuilder = require('../../app/vendor/CardBuilder')
 const BaseService =  require('../../core/BaseService')
 const store = require('../../store')
 const NUMBER_CASINO_MAIN_PAGE = 15
@@ -16,6 +18,8 @@ const NUMBER_POST_BONUS_PAGE = 2000
 const NUMBER_POST_GAME_PAGE = 2000
 const NUMBER_POST_ARTICLE_PAGE = 2000
 const NUMBER_POST_PAYMENT_PAGE = 2000
+const NUMBER_POST_LICENSE_PAGE = 2000
+const NUMBER_POST_VENDOR_PAGE = 2000
 
 class Service extends BaseService {
     static async getPublicPostByUrl(url) {
@@ -55,6 +59,16 @@ class Service extends BaseService {
             }
             else if(url === 'payment') {
                 const {body, confirm} = await this.dataPaymentPages(data[0]) 
+                err.push(confirm) 
+                supportData = body
+            }
+            else if(url === 'license') {
+                const {body, confirm} = await this.dataLicensePages(data[0]) 
+                err.push(confirm) 
+                supportData = body
+            }
+            else if(url === 'vendor') {
+                const {body, confirm} = await this.dataVendorPages(data[0]) 
                 err.push(confirm) 
                 supportData = body
             }
@@ -256,6 +270,38 @@ class Service extends BaseService {
         const payments = await PaymentModel.allPublic(paymentSettingsQuery)
         err.push(payments.confirm) 
         response.body.payments = await PaymentCardBuilder.mainCard(payments.data)
+
+        response.confirm = err.includes('error') ? 'error' : 'ok'
+        return response
+    }
+    static async dataLicensePages(data) {
+        const response = {
+            confirm: 'error',
+            body: {}
+        }
+        const err = []
+
+        const LicenseModel = new PostModel('LICENSE')
+        const licenseSettingsQuery = {limit: NUMBER_POST_LICENSE_PAGE, lang: data.lang}
+        const licenses = await LicenseModel.allPublic(licenseSettingsQuery)
+        err.push(licenses.confirm) 
+        response.body.licenses = await LicenseCardBuilder.mainCard(licenses.data)
+
+        response.confirm = err.includes('error') ? 'error' : 'ok'
+        return response
+    }
+    static async dataVendorPages(data) {
+        const response = {
+            confirm: 'error',
+            body: {}
+        }
+        const err = []
+
+        const VendorModel = new PostModel('VENDOR')
+        const vendorSettingsQuery = {limit: NUMBER_POST_VENDOR_PAGE, lang: data.lang}
+        const vendors = await VendorModel.allPublic(vendorSettingsQuery)
+        err.push(vendors.confirm) 
+        response.body.vendors = await VendorCardBuilder.mainCard(vendors.data)
 
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response
