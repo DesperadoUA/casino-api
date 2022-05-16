@@ -1,5 +1,6 @@
 const PageModel = require('./models')
 const PostModel = require('./../../core/models/Post')
+const CategoryModel = require('./../../core/models/Category')
 const CardBuilder =  require('./CardBuilder')
 const CasinoCardBuilder = require('../../app/casino/CardBuilder')
 const GameCardBuilder = require('../../app/game/CardBuilder')
@@ -207,6 +208,11 @@ class Service extends BaseService {
         err.push(casinos.confirm) 
         response.body.casinos = await CasinoCardBuilder.mainCard(casinos.data)
 
+        const CasinoCategoryModel = new CategoryModel('CASINO')
+        const category = await CasinoCategoryModel.allPublic({lang: data.lang})
+        err.push(category.confirm) 
+        response.body.category = CardBuilder.defaultCard(category.data)
+
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response
     }
@@ -222,6 +228,11 @@ class Service extends BaseService {
         const bonuses = await BonusModel.allPublic(bonusSettingsQuery)
         err.push(bonuses.confirm) 
         response.body.bonuses = await BonusCardBuilder.mainCard(bonuses.data)
+
+        const BonusCategoryModel = new CategoryModel('BONUS')
+        const category = await BonusCategoryModel.allPublic({lang: data.lang})
+        err.push(category.confirm) 
+        response.body.category = CardBuilder.defaultCard(category.data)
 
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response
@@ -239,6 +250,11 @@ class Service extends BaseService {
         err.push(games.confirm) 
         response.body.games = await GameCardBuilder.mainCard(games.data)
 
+        const GameCategoryModel = new CategoryModel('GAME')
+        const category = await GameCategoryModel.allPublic({lang: data.lang})
+        err.push(category.confirm) 
+        response.body.category = CardBuilder.defaultCard(category.data)
+
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response
     }
@@ -254,6 +270,11 @@ class Service extends BaseService {
         const articles = await ArticleModel.allPublic(articleSettingsQuery)
         err.push(articles.confirm) 
         response.body.articles = await ArticleCardBuilder.mainCard(articles.data)
+
+        const ArticleCategoryModel = new CategoryModel('ARTICLE')
+        const category = await ArticleCategoryModel.allPublic({lang: data.lang})
+        err.push(category.confirm) 
+        response.body.category = CardBuilder.defaultCard(category.data)
 
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response
@@ -271,6 +292,11 @@ class Service extends BaseService {
         err.push(payments.confirm) 
         response.body.payments = await PaymentCardBuilder.mainCard(payments.data)
 
+        const PaymentCategoryModel = new CategoryModel('PAYMENT')
+        const category = await PaymentCategoryModel.allPublic({lang: data.lang})
+        err.push(category.confirm) 
+        response.body.category = CardBuilder.defaultCard(category.data)
+
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response
     }
@@ -287,6 +313,11 @@ class Service extends BaseService {
         err.push(licenses.confirm) 
         response.body.licenses = await LicenseCardBuilder.mainCard(licenses.data)
 
+        const LicenseCategoryModel = new CategoryModel('LICENSE')
+        const category = await LicenseCategoryModel.allPublic({lang: data.lang})
+        err.push(category.confirm) 
+        response.body.category = CardBuilder.defaultCard(category.data)
+
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response
     }
@@ -302,6 +333,11 @@ class Service extends BaseService {
         const vendors = await VendorModel.allPublic(vendorSettingsQuery)
         err.push(vendors.confirm) 
         response.body.vendors = await VendorCardBuilder.mainCard(vendors.data)
+
+        const VendorCategoryModel = new CategoryModel('VENDOR')
+        const category = await VendorCategoryModel.allPublic({lang: data.lang})
+        err.push(category.confirm) 
+        response.body.category = CardBuilder.defaultCard(category.data)
 
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response

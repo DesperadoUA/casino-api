@@ -131,5 +131,14 @@ class CardBuilder {
         arr.forEach(item => newData.push(item.title))
         return newData
     }
+    static defaultCard(arr){
+        if(arr.length === 0) return []
+        const posts = []
+        arr.forEach(item => posts.push({
+            permalink: `/${item.slug}/${item.permalink}`,
+            title: item.title,
+        }))
+        return posts
+    }
 }
 module.exports = CardBuilder
