@@ -28,7 +28,8 @@ class Service extends BaseService {
             err.push(posts.confirm)
             
             response.confirm = err.includes('error') ? 'error' : 'ok'
-            response.body = Object.assign(CardBuilder.singleCategory(data[0]), {posts: CardBuilder.fetch(posts.data)})
+            const postsCard = await CardBuilder.mainCard(posts.data)
+            response.body = Object.assign(CardBuilder.singleCategory(data[0]), {posts: postsCard})
         }
         return response
     } 
