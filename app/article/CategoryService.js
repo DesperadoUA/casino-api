@@ -26,10 +26,13 @@ class Service extends BaseService {
             err.push(relativeData.confirm)
             const posts = await postModel.publicPostsByArrId(relativeData.data, {orderKey: settings.config.keySort})
             err.push(posts.confirm)
-            
+            const category = await categoryModel.allPublic({lang: data[0].lang})
+            err.push(category.confirm) 
+
             response.confirm = err.includes('error') ? 'error' : 'ok'
             const postsCard = await CardBuilder.mainCard(posts.data)
-            response.body = Object.assign(CardBuilder.singleCategory(data[0]), {posts: postsCard})
+            const categoryCard = CardBuilder.defaultCard(category.data) 
+            response.body = Object.assign(CardBuilder.singleCategory(data[0]), {posts: postsCard, category: categoryCard})
         }
         return response
     } 
