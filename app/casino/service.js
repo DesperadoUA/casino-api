@@ -1,6 +1,8 @@
 const PostModel = require('./models')
 const CardBuilder =  require('./CardBuilder')
+const BonusCardBuilder = require('../bonus/CardBuilder')
 const BaseService =  require('../../core/BaseService')
+const RelativeModel = require('../../core/models/Relative')
 const settings = require('./settings')
 const store = require('../../store')
 const TABLE = settings.config.table
@@ -20,6 +22,42 @@ class Service extends BaseService {
             err.push(confirm)
             response.confirm = 'ok'
             response.body = CardBuilder.show(data[0])
+            /*----------- License ---------*/
+            const CasinoLicenseRelativeModel = new RelativeModel('CASINO', 'license')
+            const LicenseModel = new PostModel('LICENSE')
+            const licenseId = await CasinoLicenseRelativeModel.getRelatives(data[0].id)
+            err.push(licenseId.confirm)
+            const licensePost = await LicenseModel.publicPostsByArrId(licenseId.data)
+            err.push(licensePost.confirm)
+            response.body.license = licensePost.data.map(item => item.title)
+            /*----------- End License ---------*/
+            /*----------- Bonuses -----------*/
+            const BonusCasinoRelativeModel = new RelativeModel('BONUS', 'casino')
+            const BonusModel = new PostModel('BONUS')
+            const bonusesId = await BonusCasinoRelativeModel.getPosts(data[0].id)
+            err.push(bonusesId.confirm)
+            const bonusPost = await BonusModel.publicPostsByArrId(bonusesId.data)
+            err.push(bonusPost.confirm)
+            response.body.bonuses = await BonusCardBuilder.mainCard(bonusPost.data)
+            /*----------- End Bonuses -----------*/
+            /*----------- Vendors ---------*/
+            const CasinoVendorRelativeModel = new RelativeModel('CASINO', 'vendor')
+            const VendorModel = new PostModel('VENDOR')
+            const vendorId = await CasinoVendorRelativeModel.getRelatives(data[0].id)
+            err.push(vendorId.confirm)
+            const vendorPost = await VendorModel.publicPostsByArrId(vendorId.data)
+            err.push(vendorPost.confirm)
+            response.body.vendors = vendorPost.data.map(item => item.title)
+            /*----------- End Vendors ---------*/
+            /*----------- Payment ---------*/
+            const CasinoPaymentRelativeModel = new RelativeModel('CASINO', 'payment')
+            const PaymentModel = new PostModel('PAYMENT')
+            const paymentId = await CasinoPaymentRelativeModel.getRelatives(data[0].id)
+            err.push(paymentId.confirm)
+            const paymentPost = await PaymentModel.publicPostsByArrId(paymentId.data)
+            err.push(paymentPost.confirm)
+            response.body.payments = paymentPost.data.map(item => item.title)
+            /*----------- End Payment ---------*/
 
             response.confirm = err.includes('error') ? 'error' : 'ok'
         }
