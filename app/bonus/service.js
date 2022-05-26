@@ -1,6 +1,7 @@
 const PostModel = require('./models')
 const CardBuilder =  require('./CardBuilder')
 const BaseService =  require('../../core/BaseService')
+const RelativeModel = require('../../core/models/Relative')
 const settings = require('./settings')
 const store = require('../../store')
 const TABLE = settings.config.table
@@ -21,6 +22,28 @@ class Service extends BaseService {
             response.confirm = 'ok'
             response.body = CardBuilder.show(data[0])
 
+            /*----------- Casino ---------*/
+            const BonusCasinoRelativeModel = new RelativeModel('BONUS', 'casino')
+            const CasinoModel = new PostModel('CASINO')
+            const BonusModel = new PostModel('BONUS')
+            const casinoId = await BonusCasinoRelativeModel.getRelatives(data[0].id)
+            err.push(casinoId.confirm)
+            const casinoPost = await CasinoModel.publicPostsByArrId(casinoId.data)
+            err.push(casinoPost.confirm)
+            response.body.casino = {}
+            if(casinoPost.data.length !== 0) {
+                response.body.casino.thumbnail = casinoPost.data[0].thumbnail
+                response.body.casino.title = casinoPost.data[0].title
+                response.body.casino.permalink = `/${casinoPost.data[0].slug}/${casinoPost.data[0].permalink}`
+                /*----------- Bonuses ------------*/
+                const bonusesId = await BonusCasinoRelativeModel.getPosts(casinoPost.data[0].id)
+                err.push(bonusesId.confirm)
+                const bonusPost = await BonusModel.publicPostsByArrId(bonusesId.data.filter(item => item !== data[0].id))
+                err.push(bonusPost.confirm)
+                response.body.bonuses = await CardBuilder.mainCard(bonusPost.data)
+                /*----------- End Bonuses ------------*/
+            }
+            /*----------- End Casino ---------*/
             response.confirm = err.includes('error') ? 'error' : 'ok'
         }
         return response
