@@ -1,6 +1,8 @@
 const PostModel = require('./models')
 const CardBuilder =  require('./CardBuilder')
+const CasinoCardBuilder =  require('../casino/CardBuilder')
 const BaseService =  require('../../core/BaseService')
+const RelativeModel = require('../../core/models/Relative')
 const settings = require('./settings')
 const store = require('../../store')
 const TABLE = settings.config.table
@@ -20,7 +22,13 @@ class Service extends BaseService {
             err.push(confirm)
             response.confirm = 'ok'
             response.body = CardBuilder.show(data[0])
-
+            /*------ Casino ------*/
+            const CasinoLicenseRelativeModel = new RelativeModel('CASINO', 'license')
+            const CasinoModel = new PostModel('CASINO')
+            const casinosId = await CasinoLicenseRelativeModel.getPosts(data[0].id)
+            const casinoPost = await CasinoModel.publicPostsByArrId(casinosId.data)
+            response.body.casinos = await CasinoCardBuilder.mainCard(casinoPost.data)
+            /*------ End Casino ------*/
             response.confirm = err.includes('error') ? 'error' : 'ok'
         }
         return response
