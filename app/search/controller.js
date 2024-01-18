@@ -3,7 +3,7 @@ const router = Router()
 const Service = require('./service')
 const auth = require('./../../middleware/auth')
 
-router.post('/search', async (req, res) => {
+router.get('/search', async (req, res) => {
     const {lang, searchWord} = req.body
     const response = await Service.search(lang, searchWord)
     res.status(200).json(response)
